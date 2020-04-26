@@ -76,13 +76,37 @@ public class Tracker {
      * @return Заявка
      */
     public Item findById(String id) {
-        Item rsl = null;
-        for (int i = 0; i < position; i++) {
-            if (items[i] != null && items[i].getId().equals(id)) {
-                rsl = items[i];
+        int index = indexOf(id);
+        return index != -1 ? items[index] : null;
+    }
+
+    /**
+     * Метод находит индекс заявки по ее ключу.
+     * @param id Ключ
+     * @return Индекс
+     */
+    private int indexOf(String id) {
+        int rsl = -1;
+        for (int index = 0; index < position; index++) {
+            if (items[index].getId().equals(id)) {
+                rsl = index;
                 break;
             }
         }
         return rsl;
+    }
+
+    /**
+     * Метод осуществляет замену заявки на новую. При этом идентификатор от старой заявки сохраняется.
+     * @param id Индентификатор заявки, которую нужно заменить
+     * @param item Новая заявка на которую нужно заменить старую
+     * @return true, если замена прошла успешно, иначе false
+     */
+    public boolean replace(String id, Item item) {
+        int index  = indexOf(id);
+        if (index != -1) {
+            items[index].setName(item.getName());
+        }
+        return index != -1 ? true : false;
     }
 }
