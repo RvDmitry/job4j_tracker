@@ -107,6 +107,6 @@ public class Tracker {
         if (index != -1) {
             items[index].setName(item.getName());
         }
-        return index != -1 ? true : false;
+        return index != -1;
     }
 }
