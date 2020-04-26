@@ -103,4 +103,19 @@ public class Tracker {
         }
         return index != -1;
     }
+
+    /**
+     * Метод осуществляет удаление заявки с заданным идентификатором.
+     * @param id Идентификатор заявки, которую нужно удалить
+     * @return true, если удаление прошло успешно, иначе false
+     */
+    public boolean delete(String id) {
+        int index = indexOf(id);
+        if (index != -1) {
+            System.arraycopy(items, index + 1, items, index, position - 1 - index);
+            items[position - 1] = null;
+            position--;
+        }
+        return index != -1;
+    }
 }
