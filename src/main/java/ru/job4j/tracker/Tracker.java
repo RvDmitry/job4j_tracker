@@ -44,14 +44,7 @@ public class Tracker {
      * @return Копия массива items
      */
     public Item[] findAll() {
-        int size = 0;
-        Item[] result = new Item[items.length];
-        for (int i = 0; i < position; i++) {
-            if (items[i] != null) {
-                result[size++] = items[i];
-            }
-        }
-        return Arrays.copyOf(result, size);
+        return Arrays.copyOf(items, position);
     }
 
     /**
@@ -63,7 +56,7 @@ public class Tracker {
         int size = 0;
         Item[] result = new Item[items.length];
         for (int i = 0; i < position; i++) {
-            if (items[i] != null && items[i].getName().equals(name)) {
+            if (items[i].getName().equals(name)) {
                 result[size++] = items[i];
             }
         }
