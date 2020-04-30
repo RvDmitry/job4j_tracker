@@ -20,18 +20,22 @@ public class StartUI {
             this.showMenu();
             System.out.print("Select: ");
             int select = Integer.valueOf(scanner.nextLine());
+            String name;
+            String id;
+            Item item;
+            Item[] items;
             switch (select) {
                 case 0 :
                     System.out.println("=== Create a new Item ====");
                     System.out.print("Enter name: ");
-                    String name = scanner.nextLine();
-                    Item item = new Item(name);
+                    name = scanner.nextLine();
+                    item = new Item(name);
                     tracker.add(item);
                     System.out.println("Done.");
                     break;
                 case 1 :
                     System.out.println("=== All Items ====");
-                    Item[] items = tracker.findAll();
+                    items = tracker.findAll();
                     for (Item current :items) {
                         System.out.println("Id: " + current.getId() + "   name: " + current.getName());
                     }
@@ -40,7 +44,7 @@ public class StartUI {
                 case 2 :
                     System.out.println("=== Edit item ===");
                     System.out.print("Enter Item Id you will edit: ");
-                    String id = scanner.nextLine();
+                    id = scanner.nextLine();
                     System.out.print("Enter new name: ");
                     name = scanner.nextLine();
                     item = new Item(name);
