@@ -8,8 +8,103 @@ package ru.job4j.tracker;
  */
 public class StartUI {
     /**
+     * Метод создает новую заявку.
+     * @param input Объект для считывания ответов пользователя
+     * @param tracker Объект Tracker обрабатывает действия пользователя при работе с заявками
+     */
+    public static void createItem(Input input, Tracker tracker) {
+        System.out.println("=== Create a new Item ====");
+        String name = input.askStr("Enter name: ");
+        Item item = new Item(name);
+        tracker.add(item);
+        System.out.println("Done.");
+    }
+
+    /**
+     * Метод выводит все заявки на экран.
+     * @param tracker Объект Tracker обрабатывает действия пользователя при работе с заявками
+     */
+    public static void findAllItems(Tracker tracker) {
+        System.out.println("=== All Items ====");
+        Item[] items = tracker.findAll();
+        for (Item current :items) {
+            System.out.println("Id: " + current.getId() + "   name: " + current.getName());
+        }
+        System.out.println("Done.");
+    }
+
+    /**
+     * Метод выполняет редактирование заявки.
+     * @param input Объект для считывания ответов пользователя
+     * @param tracker Объект Tracker обрабатывает действия пользователя при работе с заявками
+     */
+    public static void replaceItem(Input input, Tracker tracker) {
+        System.out.println("=== Edit item ===");
+        String id =  input.askStr("Enter Item Id you will edit: ");
+        String name =  input.askStr("Enter new name: ");
+        Item item = new Item(name);
+        if (tracker.replace(id, item)) {
+            System.out.println("Item successfully edited");
+        } else {
+            System.out.println("Item with this Id was not found.");
+        }
+    }
+
+    /**
+     * Метод выполняет удаление заявки.
+     * @param input Объект для считывания ответов пользователя
+     * @param tracker Объект Tracker обрабатывает действия пользователя при работе с заявками
+     */
+    public static void deteleItem(Input input, Tracker tracker) {
+        System.out.println("=== Delete item ====");
+        String id =  input.askStr("Enter Item Id: ");
+        if (tracker.delete(id)) {
+            System.out.println("Item successfully deleted");
+        } else {
+            System.out.println("Item with this Id was not found.");
+        }
+    }
+
+    /**
+     * Метод осуществляет поиск заявки по ее идентификационному номеру и выводит ее на экран.
+     * @param input Объект для считывания ответов пользователя
+     * @param tracker Объект Tracker обрабатывает действия пользователя при работе с заявками
+     */
+    public static void findItemById(Input input, Tracker tracker) {
+        System.out.println("=== Find item by Id ====");
+        String id =  input.askStr("Enter Item Id: ");
+        Item item = tracker.findById(id);
+        if (item == null) {
+            System.out.println("No item with this Id.");
+        } else {
+            System.out.println("Id: " + item.getId() + "    name: " + item.getName());
+            System.out.println("Done.");
+        }
+    }
+
+    /**
+     * Метод осуществляет поиск заявки по ее имени и выводит ее на экран.
+     * Если найдено несколько заявок с одинаковым именем, то выводит их все.
+     * @param input Объект для считывания ответов пользователя
+     * @param tracker Объект Tracker обрабатывает действия пользователя при работе с заявками
+     */
+    public static void findItemsByName(Input input, Tracker tracker) {
+        System.out.println("=== Find items by name ===");
+        String name =  input.askStr("Enter Item name: ");
+        Item[] items = tracker.findByName(name);
+        if (items.length == 0) {
+            System.out.println("No item with this name.");
+        } else {
+            for (Item current : items) {
+                System.out.println("Id: " + current.getId() + "   name: " + current.getName());
+            }
+            System.out.println("Done.");
+        }
+    }
+
+    /**
      * Метод обрабатывает действия пользователя при работе с меню.
-     * @param input Объект Scanner для считывания выбора пользователя пунктов меню
+     * @param input Объект для считывания ответов пользователя
      * @param tracker Объект Tracker обрабатывает действия пользователя при работе с заявками
      */
     public void init(Input input, Tracker tracker) {
@@ -17,69 +112,24 @@ public class StartUI {
         while (run) {
             this.showMenu();
             int select = input.askInt("Select: ");
-            String name;
-            String id;
-            Item item;
-            Item[] items;
             switch (select) {
                 case 0 :
-                    System.out.println("=== Create a new Item ====");
-                    name =  input.askStr("Enter name: ");
-                    item = new Item(name);
-                    tracker.add(item);
-                    System.out.println("Done.");
+                    StartUI.createItem(input, tracker);
                     break;
                 case 1 :
-                    System.out.println("=== All Items ====");
-                    items = tracker.findAll();
-                    for (Item current :items) {
-                        System.out.println("Id: " + current.getId() + "   name: " + current.getName());
-                    }
-                    System.out.println("Done.");
+                    StartUI.findAllItems(tracker);
                     break;
                 case 2 :
-                    System.out.println("=== Edit item ===");
-                    id =  input.askStr("Enter Item Id you will edit: ");
-                    name =  input.askStr("Enter new name: ");
-                    item = new Item(name);
-                    if (tracker.replace(id, item)) {
-                        System.out.println("Item successfully edited");
-                    } else {
-                        System.out.println("Item with this Id was not found.");
-                    }
+                    StartUI.replaceItem(input, tracker);
                     break;
                 case 3 :
-                    System.out.println("=== Delete item ====");
-                    id =  input.askStr("Enter Item Id: ");
-                    if (tracker.delete(id)) {
-                        System.out.println("Item successfully deleted");
-                    } else {
-                        System.out.println("Item with this Id was not found.");
-                    }
+                    StartUI.deteleItem(input, tracker);
                     break;
                 case 4 :
-                    System.out.println("=== Find item by Id ====");
-                    id =  input.askStr("Enter Item Id: ");
-                    item = tracker.findById(id);
-                    if (item == null) {
-                        System.out.println("No item with this Id.");
-                    } else {
-                        System.out.println("Id: " + item.getId() + "    name: " + item.getName());
-                        System.out.println("Done.");
-                    }
+                    StartUI.findItemById(input, tracker);
                     break;
                 case 5 :
-                    System.out.println("=== Find items by name ===");
-                    name =  input.askStr("Enter Item name: ");
-                    items = tracker.findByName(name);
-                    if (items.length == 0) {
-                        System.out.println("No item with this name.");
-                    } else {
-                        for (Item current : items) {
-                            System.out.println("Id: " + current.getId() + "   name: " + current.getName());
-                        }
-                        System.out.println("Done.");
-                    }
+                    StartUI.findItemsByName(input, tracker);
                     break;
                 case 6 :
                     run = false;
