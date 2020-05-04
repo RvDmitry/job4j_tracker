@@ -58,4 +58,16 @@ public class Item {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Метод переопределяет вывод заявки в виде строки.
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -26,8 +26,8 @@ public class FindAllAction implements UserAction{
     public boolean execute(Input input, Tracker tracker) {
         System.out.println("=== All Items ====");
         Item[] items = tracker.findAll();
-        for (Item current :items) {
-            System.out.println("Id: " + current.getId() + "   name: " + current.getName());
+        for (Item item :items) {
+            System.out.println(item);
         }
         System.out.println("Done.");
         return true;

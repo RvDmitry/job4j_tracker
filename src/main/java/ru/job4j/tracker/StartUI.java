@@ -28,7 +28,7 @@ public class StartUI {
      * @param actions Массив объектов, содержащими наименование пунктов меню.
      */
     private void showMenu(UserAction[] actions) {
-        System.out.println("\nMenu.");
+        System.out.println(System.lineSeparator() + "Menu.");
         for (int index = 0; index < actions.length; index++) {
             System.out.println(index + ". " + actions[index].name());
         }

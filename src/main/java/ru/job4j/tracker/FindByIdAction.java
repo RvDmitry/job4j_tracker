@@ -30,7 +30,7 @@ public class FindByIdAction implements UserAction {
         if (item == null) {
             System.out.println("No item with this Id.");
         } else {
-            System.out.println("Id: " + item.getId() + "    name: " + item.getName());
+            System.out.println(item);
             System.out.println("Done.");
         }
         return true;
