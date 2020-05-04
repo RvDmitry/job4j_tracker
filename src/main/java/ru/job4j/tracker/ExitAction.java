@@ -18,9 +18,10 @@ public class ExitAction implements UserAction{
 
     /**
      * Метод выполняет выход из программы.
+     * Для успешного завершения программы метод должен всегда возвращать false.
      * @param input Объект для считывания ответов пользователя
      * @param tracker Объект Tracker обрабатывает действия пользователя при работе с заявками
-     * @return true, если операция выполнена успешно, иначе false
+     * @return false
      */
     @Override
     public boolean execute(Input input, Tracker tracker) {
