@@ -44,4 +44,15 @@ public class StubInput implements Input {
     public int askInt(String question) {
         return Integer.valueOf(askStr(question));
     }
+
+    /**
+     * Метод иммитирует ответы пользователя, возвращяя заранее переданный массив ответов поэлементно при вызове метода.
+     * @param question Вопрос на который нужно ответить пользователю
+     * @param max Максимальное число, которое может ввести пользователь
+     * @return Элементы массива ответов
+     */
+    @Override
+    public int askInt(String question, int max) {
+        return askInt(question);
+    }
 }

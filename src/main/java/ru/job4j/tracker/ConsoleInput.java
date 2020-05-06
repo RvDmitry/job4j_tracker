@@ -34,4 +34,20 @@ public class ConsoleInput implements Input {
     public int askInt(String question) {
         return Integer.valueOf(askStr(question));
     }
+
+    /**
+     * Метод запрашивает от пользователя ввод данных от 0 до max.
+     * @param question Вопрос на который нужно ответить пользователю
+     * @param max Максимальное число, которое может ввести пользователь
+     * @return Число введенное пользователем
+     */
+    @Override
+    public int askInt(String question, int max) {
+        int select = askInt(question);
+        if (select >= 0 && select < max) {
+            return select;
+        } else {
+            throw new IllegalStateException(String.format("Out of about %s > [0, %s]", select, max));
+        }
+    }
 }

@@ -20,4 +20,12 @@ public interface Input {
      * @return Число введенное пользователем
      */
     int askInt(String question);
+
+    /**
+     * Метод запрашивает от пользователя ввод данных от 0 до max.
+     * @param question Вопрос на который нужно ответить пользователю
+     * @param max Максимальное число, которое может ввести пользователь
+     * @return Число введенное пользователем
+     */
+    int askInt(String question, int max);
 }
