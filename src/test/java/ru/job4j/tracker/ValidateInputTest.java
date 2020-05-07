@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.is;
 public class ValidateInputTest {
     /**
      * Тест проверяет валидацию на правильность ввода пользователем числа.
-     * Метод ValidateStubInput иммитирует ввод данных пользователем.
+     * Класс StubInput иммитирует ответы пользователя.
      * Если пользователь ввел не число, метод ValidateInput снова запрашивает ввод.
      */
     @Test
@@ -22,8 +22,9 @@ public class ValidateInputTest {
         ByteArrayOutputStream mem = new ByteArrayOutputStream();
         PrintStream out = System.out;
         System.setOut(new PrintStream(mem));
-        String[] data = {"one", "1"};
-        ValidateInput input = new ValidateStubInput(data);
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"one", "1"})
+        );
         input.askInt("Enter");
         assertThat(
                 mem.toString(),
@@ -34,7 +35,7 @@ public class ValidateInputTest {
 
     /**
      * Тест проверяет валидацию на правильность ввода пользователем числа.
-     * Метод ValidateStubInput иммитирует ввод данных пользователем.
+     * Класс StubInput иммитирует ответы пользователя.
      * Если пользователь ввел число больше либо равное максимальному,
      * метод ValidateInput снова запрашивает ввод.
      */
@@ -43,8 +44,9 @@ public class ValidateInputTest {
         ByteArrayOutputStream mem = new ByteArrayOutputStream();
         PrintStream out = System.out;
         System.setOut(new PrintStream(mem));
-        String[] data = {"4", "1"};
-        ValidateInput input = new ValidateStubInput(data);
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"4", "1"})
+        );
         input.askInt("Enter", 2);
         assertThat(
                 mem.toString(),
