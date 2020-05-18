@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * Class FindByNameAction
  * Класс отвечает за поиск заявки по ее имени и вывода соответствующего пункта меню.
@@ -26,8 +28,8 @@ public class FindByNameAction implements UserAction{
     public boolean execute(Input input, Tracker tracker) {
         System.out.println("=== Find items by name ===");
         String name =  input.askStr("Enter Item name: ");
-        Item[] items = tracker.findByName(name);
-        if (items.length == 0) {
+        List<Item> items = tracker.findByName(name);
+        if (items.size() == 0) {
             System.out.println("No item with this name.");
         } else {
             for (Item item : items) {

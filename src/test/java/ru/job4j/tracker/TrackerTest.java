@@ -1,6 +1,9 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -25,10 +28,10 @@ public class TrackerTest {
         Item item3 = new Item("test3");
         tracker.add(item3);
         String[] expected = {item1.getName(), item2.getName(), item3.getName()};
-        Item[] items = tracker.findAll();
-        String[] result = new String[items.length];
-        for (int i = 0; i < items.length; i++) {
-            result[i] = items[i].getName();
+        List<Item> items = tracker.findAll();
+        String[] result = new String[items.size()];
+        for (int i = 0; i < items.size(); i++) {
+            result[i] = items.get(i).getName();
         }
         assertThat(result, is(expected));
     }
@@ -45,10 +48,10 @@ public class TrackerTest {
         Item item4 = new Item("test4");
         tracker.add(item4);
         String[] expected = {item1.getName(), item3.getName()};
-        Item[] items = tracker.findByName("test1");
-        String[] result = new String[items.length];
-        for (int i = 0; i < items.length; i++) {
-            result[i] = items[i].getName();
+        List<Item> items = tracker.findByName("test1");
+        String[] result = new String[items.size()];
+        for (int i = 0; i < items.size(); i++) {
+            result[i] = items.get(i).getName();
         }
         assertThat(result, is(expected));
     }
@@ -90,10 +93,10 @@ public class TrackerTest {
         String id = item2.getId();
         tracker.delete(id);
         String[] expected = {item1.getName(), item3.getName(), item4.getName(), item5.getName()};
-        Item[] items = tracker.findAll();
-        String[] result = new String[items.length];
-        for (int i = 0; i < items.length; i++) {
-            result[i] = items[i].getName();
+        List<Item> items = tracker.findAll();
+        String[] result = new String[items.size()];
+        for (int i = 0; i < items.size(); i++) {
+            result[i] = items.get(i).getName();
         }
         assertThat(result, is(expected));
     }

@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * Class FindAllAction
  * Класс отвечает за поиск всех заявок и вывода соответствующего пункта меню.
@@ -25,7 +27,7 @@ public class FindAllAction implements UserAction{
     @Override
     public boolean execute(Input input, Tracker tracker) {
         System.out.println("=== All Items ====");
-        Item[] items = tracker.findAll();
+        List<Item> items = tracker.findAll();
         for (Item item :items) {
             System.out.println(item);
         }

@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Class StartUI
  * Класс реализует меню заявок.
@@ -13,36 +16,36 @@ public class StartUI {
      * @param tracker Объект Tracker обрабатывает действия пользователя при работе с заявками
      * @param actions Массив объектов, выполняющих различные действия над заявками.
      */
-    public void init(Input input, Tracker tracker, UserAction[] actions) {
+    public void init(Input input, Tracker tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
-            int select = input.askInt("Select: ", actions.length);
-            UserAction action = actions[select];
+            int select = input.askInt("Select: ", actions.size());
+            UserAction action = actions.get(select);
             run = action.execute(input, tracker);
         }
     }
 
     /**
      * Метод отображает меню приложения на экране.
-     * @param actions Массив объектов, содержащими наименование пунктов меню.
+     * @param actions Список объектов, содержащих наименование пунктов меню.
      */
-    private void showMenu(UserAction[] actions) {
+    private void showMenu(List<UserAction> actions) {
         System.out.println(System.lineSeparator() + "Menu.");
-        for (int index = 0; index < actions.length; index++) {
-            System.out.println(index + ". " + actions[index].name());
+        for (int index = 0; index < actions.size(); index++) {
+            System.out.println(index + ". " + actions.get(index).name());
         }
     }
 
     /**
-     * Главный метод программы. Создает массив действий для польователя. Запускает выполнение приложения.
+     * Главный метод программы. Создает список действий для польователя. Запускает выполнение приложения.
      * @param args Параметры командной строки
      */
     public static void main(String[] args) {
         Input input = new ConsoleInput();
         Input validate = new ValidateInput(input);
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new CreateAction(),
                 new FindAllAction(),
                 new ReplaceAction(),
@@ -50,7 +53,7 @@ public class StartUI {
                 new FindByIdAction(),
                 new FindByNameAction(),
                 new ExitAction()
-        };
+        );
         new StartUI().init(validate, tracker, actions);
     }
 }
