@@ -61,7 +61,7 @@ public class Item {
 
     /**
      * Метод переопределяет вывод заявки в виде строки.
-     * @return
+     * @return Строка
      */
     @Override
     public String toString() {
