@@ -6,7 +6,7 @@ package ru.job4j.tracker;
  * @author Dmitry Razumov
  * @version 1
  */
-public class ExitAction implements UserAction{
+public class ExitAction implements UserAction {
     /**
      * Метод возвращает наименование пункта меню.
      * @return Наименование пункта меню

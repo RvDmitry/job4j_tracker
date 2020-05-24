@@ -8,7 +8,7 @@ import java.util.List;
  * @author Dmitry Razumov
  * @version 1
  */
-public class FindByNameAction implements UserAction{
+public class FindByNameAction implements UserAction {
     /**
      * Метод возвращает наименование пункта меню.
      * @return Наименование пункта меню
