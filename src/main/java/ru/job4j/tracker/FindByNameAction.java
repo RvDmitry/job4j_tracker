@@ -25,7 +25,7 @@ public class FindByNameAction implements UserAction {
      * @return true, если операция выполнена успешно, иначе false
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         System.out.println("=== Find items by name ===");
         String name =  input.askStr("Enter Item name: ");
         List<Item> items = tracker.findByName(name);

@@ -23,7 +23,7 @@ public class ReplaceAction implements UserAction {
      * @return true, если операция выполнена успешно, иначе false
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         System.out.println("=== Edit item ===");
         String id =  input.askStr("Enter Item Id you will edit: ");
         String name =  input.askStr("Enter new name: ");

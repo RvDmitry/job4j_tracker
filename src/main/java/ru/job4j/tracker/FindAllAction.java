@@ -25,7 +25,7 @@ public class FindAllAction implements UserAction {
      * @return true, если операция выполнена успешно, иначе false
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         System.out.println("=== All Items ====");
         List<Item> items = tracker.findAll();
         for (Item item :items) {

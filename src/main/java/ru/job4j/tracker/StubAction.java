@@ -28,7 +28,7 @@ public class StubAction implements UserAction {
      * @return false
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         call = true;
         return false;
     }

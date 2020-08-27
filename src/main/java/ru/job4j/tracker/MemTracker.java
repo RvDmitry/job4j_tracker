@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Class Tracker
+ * Class MemTracker
  * @author Dmitry Razumov
  * @version $Id$
  * @since 0.1
  */
-public class Tracker {
+public class MemTracker {
     /**
      * Список для хранения заявок.
      */

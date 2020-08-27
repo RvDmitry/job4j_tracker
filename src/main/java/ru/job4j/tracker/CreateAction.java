@@ -23,7 +23,7 @@ public class CreateAction implements UserAction {
      * @return true, если операция выполнена успешно, иначе false
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         System.out.println("=== Create a new Item ====");
         String name = input.askStr("Enter name: ");
         Item item = new Item(name);

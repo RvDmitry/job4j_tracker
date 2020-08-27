@@ -24,7 +24,7 @@ public class ExitAction implements UserAction {
      * @return false
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         return false;
     }
 }

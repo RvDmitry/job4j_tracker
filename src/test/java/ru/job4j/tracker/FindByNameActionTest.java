@@ -21,7 +21,7 @@ public class FindByNameActionTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         PrintStream def = System.out;
         System.setOut(new PrintStream(out));
-        Tracker tracker = new Tracker();
+        Store tracker = new SqlTracker();
         Item item = new Item("Java Hot");
         tracker.add(item);
         FindByNameAction act = new FindByNameAction();

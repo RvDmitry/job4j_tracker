@@ -20,5 +20,5 @@ public interface UserAction {
      * @param tracker Объект Tracker обрабатывает действия пользователя при работе с заявками
      * @return true, если операция выполнена успешно, иначе false
      */
-    boolean execute(Input input, Tracker tracker);
+    boolean execute(Input input, Store tracker);
 }
