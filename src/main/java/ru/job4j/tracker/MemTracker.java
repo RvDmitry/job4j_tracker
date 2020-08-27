@@ -10,16 +10,27 @@ import java.util.Random;
  * @version $Id$
  * @since 0.1
  */
-public class MemTracker {
+public class MemTracker implements Store {
     /**
      * Список для хранения заявок.
      */
     private final List<Item> items = new ArrayList<>();
 
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void close() throws Exception {
+
+    }
+
     /**
      * Метод добавления заявки в хранилище.
      * @param item Новая заявка
      */
+    @Override
     public Item add(Item item) {
         item.setId(generateId());
         items.add(item);
@@ -39,6 +50,7 @@ public class MemTracker {
      * Метод возвращает список заявок.
      * @return Список заявок
      */
+    @Override
     public List<Item> findAll() {
         return items;
     }
@@ -48,6 +60,7 @@ public class MemTracker {
      * @param name Имя
      * @return Список заявок
      */
+    @Override
     public List<Item> findByName(String name) {
         List<Item> result = new ArrayList<>();
         for (Item item : items) {
@@ -63,6 +76,7 @@ public class MemTracker {
      * @param id Ключ
      * @return Заявка
      */
+    @Override
     public Item findById(String id) {
         int index = indexOf(id);
         return index != -1 ? items.get(index) : null;
@@ -90,6 +104,7 @@ public class MemTracker {
      * @param item Новая заявка на которую нужно заменить старую
      * @return true, если замена прошла успешно, иначе false
      */
+    @Override
     public boolean replace(String id, Item item) {
         int index  = indexOf(id);
         if (index != -1) {
@@ -104,6 +119,7 @@ public class MemTracker {
      * @param id Идентификатор заявки, которую нужно удалить
      * @return true, если удаление прошло успешно, иначе false
      */
+    @Override
     public boolean delete(String id) {
         int index = indexOf(id);
         if (index != -1) {
