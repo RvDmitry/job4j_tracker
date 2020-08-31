@@ -19,6 +19,14 @@ public class SqlTracker implements Store {
     private Connection cn;
 
     /**
+     * Конструктор инициализирует подключение к БД.
+     * @param cn Объект - коннектор
+     */
+    public SqlTracker(Connection cn) {
+        this.cn = cn;
+    }
+
+    /**
      * Метод устанавливает соединение с базой данных.
      */
     public void init() {
@@ -54,11 +62,18 @@ public class SqlTracker implements Store {
      */
     @Override
     public Item add(Item item) {
-        try (PreparedStatement st = cn.prepareStatement("insert into items(name) values(?)")) {
+        try (PreparedStatement st = cn.prepareStatement("insert into items(name) values(?)",
+                Statement.RETURN_GENERATED_KEYS)) {
             st.setString(1, item.getName());
             st.executeUpdate();
-        } catch (Exception e) {
+            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    item.setId(generatedKeys.getString(1));
+                }
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
+            throw new IllegalStateException("Could not create new user");
         }
         return item;
     }
@@ -78,6 +93,7 @@ public class SqlTracker implements Store {
             count = st.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+            throw new IllegalStateException("Ошибка замены заявки");
         }
         return count != 0;
     }
@@ -95,6 +111,7 @@ public class SqlTracker implements Store {
             count = st.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+            throw new IllegalStateException("Ошибка удаления заявки");
         }
         return count != 0;
     }
@@ -117,6 +134,7 @@ public class SqlTracker implements Store {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            throw new IllegalStateException("Ошибка поиска заявок");
         }
         return items;
     }
@@ -142,6 +160,7 @@ public class SqlTracker implements Store {
             rs.close();
         } catch (Exception e) {
             e.printStackTrace();
+            throw new IllegalStateException("Ошибка поиска заявок");
         }
         return items;
     }
@@ -165,6 +184,7 @@ public class SqlTracker implements Store {
             rs.close();
         } catch (Exception e) {
             e.printStackTrace();
+            throw new IllegalStateException("Ошибка поиска заявки");
         }
         return item;
     }
