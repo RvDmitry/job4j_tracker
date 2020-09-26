@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * @version 2
  */
 public class StartUI {
+    private static List<String> list = new ArrayList<>();
     /**
      * Метод обрабатывает действия пользователя при работе с меню.
      * @param input Объект для считывания ответов пользователя
@@ -23,6 +25,9 @@ public class StartUI {
             int select = input.askInt("Select: ", actions.size());
             UserAction action = actions.get(select);
             run = action.execute(input, tracker);
+            for (int i = 0; i < 1000000; i++) {
+                list.add("qqqqqqqqqqqqwwwwwwsssssssssssssswwwwwwwwwww");
+            }
         }
     }
 
