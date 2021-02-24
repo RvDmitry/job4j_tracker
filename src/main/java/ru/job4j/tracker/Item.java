@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -8,16 +9,23 @@ import java.util.Objects;
  * @author Dmitry Razumov
  * @version 1
  */
+@Entity
+@Table(name = "items")
 public class Item {
     /**
      * Уникальный ключ заявки.
      */
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     /**
      * Имя заявки.
      */
     private String name;
+
+    public Item() {
+    }
 
     /**
      * Конструктор создает заявку и инициализирует ее имя.
@@ -31,7 +39,7 @@ public class Item {
      * Метод возвращает уникальный ключ.
      * @return Ключ
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -39,7 +47,7 @@ public class Item {
      * Метод задает уникальный ключ.
      * @param id Ключ
      */
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -57,6 +65,23 @@ public class Item {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Item item = (Item) o;
+        return Objects.equals(id, item.id) && Objects.equals(name, item.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 
     /**

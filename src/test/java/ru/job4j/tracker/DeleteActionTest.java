@@ -28,7 +28,7 @@ public class DeleteActionTest {
         tracker.add(item);
         DeleteAction del = new DeleteAction();
         Input input = mock(Input.class);
-        when(input.askStr(any(String.class))).thenReturn(item.getId());
+        when(input.askInt(any(String.class))).thenReturn(item.getId());
         del.execute(input, tracker);
         String ln = System.lineSeparator();
         assertThat(out.toString(), is("=== Delete item ====" + ln + "Item successfully deleted" + ln));

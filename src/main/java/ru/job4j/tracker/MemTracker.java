@@ -41,9 +41,9 @@ public class MemTracker implements Store {
      * Метод генерирует уникальный ключ для заявки.
      * @return Уникальный ключ.
      */
-    private String generateId() {
+    private int generateId() {
         Random rm = new Random();
-        return String.valueOf(rm.nextLong() + System.currentTimeMillis());
+        return (int) (rm.nextLong() + System.currentTimeMillis());
     }
 
     /**
@@ -77,7 +77,7 @@ public class MemTracker implements Store {
      * @return Заявка
      */
     @Override
-    public Item findById(String id) {
+    public Item findById(int id) {
         int index = indexOf(id);
         return index != -1 ? items.get(index) : null;
     }
@@ -87,10 +87,10 @@ public class MemTracker implements Store {
      * @param id Ключ
      * @return Индекс
      */
-    private int indexOf(String id) {
+    private int indexOf(int id) {
         int rsl = -1;
         for (int index = 0; index < items.size(); index++) {
-            if (items.get(index).getId().equals(id)) {
+            if (items.get(index).getId() == id) {
                 rsl = index;
                 break;
             }
@@ -105,7 +105,7 @@ public class MemTracker implements Store {
      * @return true, если замена прошла успешно, иначе false
      */
     @Override
-    public boolean replace(String id, Item item) {
+    public boolean replace(int id, Item item) {
         int index  = indexOf(id);
         if (index != -1) {
             item.setId(id);
@@ -120,7 +120,7 @@ public class MemTracker implements Store {
      * @return true, если удаление прошло успешно, иначе false
      */
     @Override
-    public boolean delete(String id) {
+    public boolean delete(int id) {
         int index = indexOf(id);
         if (index != -1) {
            items.remove(index);

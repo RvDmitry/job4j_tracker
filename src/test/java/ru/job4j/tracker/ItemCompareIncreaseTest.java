@@ -22,11 +22,11 @@ public class ItemCompareIncreaseTest {
     @Test
     public void compare() {
         Item a = new Item("a");
-        a.setId("1");
+        a.setId(1);
         Item b = new Item("b");
-        b.setId("2");
+        b.setId(2);
         Item c = new Item("c");
-        c.setId("3");
+        c.setId(3);
         List<Item> items = new ArrayList<>();
         items.add(b);
         items.add(c);
