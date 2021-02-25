@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
@@ -23,6 +24,16 @@ public class Item {
      * Имя заявки.
      */
     private String name;
+
+    /**
+     * Описание заявки.
+     */
+    private String description;
+
+    /**
+     * Время создания заявки.
+     */
+    private Timestamp created;
 
     public Item() {
     }
@@ -67,6 +78,38 @@ public class Item {
         this.name = name;
     }
 
+    /**
+     * Метод возвращает описание заявки.
+     * @return Описание.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Метод задает описание заявки.
+     * @param description Описание.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Метод возвращает дату создания заявки.
+     * @return Дата создания.
+     */
+    public Timestamp getCreated() {
+        return created;
+    }
+
+    /**
+     * Метод задает дату создания заявки.
+     * @param created Дата создания.
+     */
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -76,12 +119,12 @@ public class Item {
             return false;
         }
         Item item = (Item) o;
-        return Objects.equals(id, item.id) && Objects.equals(name, item.name);
+        return Objects.equals(id, item.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id);
     }
 
     /**
@@ -90,6 +133,11 @@ public class Item {
      */
     @Override
     public String toString() {
-        return "Item{" + "id='" + id + '\'' + ", name='" + name + '\'' + '}';
+        return "Item{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", description='" + description + '\''
+                + ", created=" + created
+                + '}';
     }
 }

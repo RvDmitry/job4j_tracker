@@ -6,6 +6,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -35,6 +37,12 @@ public class HibernateRun {
             List<Item> list = findAll(sf);
             for (Item it : list) {
                 System.out.println(it);
+            }
+            for (int i = 1; i <= 5; i++) {
+                item = new Item("Item" + i);
+                item.setDescription("Desc" + i);
+                item.setCreated(Timestamp.valueOf(LocalDateTime.now()));
+                create(item, sf);
             }
         }  catch (Exception e) {
             e.printStackTrace();
