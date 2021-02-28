@@ -23,13 +23,17 @@ public class SqlTracker implements Store {
      * @param cn Объект - коннектор
      */
     public SqlTracker(Connection cn) {
-        this.cn = cn;
+        if (cn == null) {
+            init();
+        } else {
+            this.cn = cn;
+        }
     }
 
     /**
      * Метод устанавливает соединение с базой данных.
      */
-    public void init() {
+    private void init() {
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
             config.load(in);
@@ -57,8 +61,8 @@ public class SqlTracker implements Store {
 
     /**
      * Метод добавляет заявку в базу данных.
-     * @param item Заявка
-     * @return true, если заявка добавлена успешна, иначе false
+     * @param item Заявка.
+     * @return Добавленная заявка.
      */
     @Override
     public Item add(Item item) {
@@ -79,10 +83,10 @@ public class SqlTracker implements Store {
     }
 
     /**
-     * Метод заменяет заявку содержщуюся в БД
-     * @param id Индентификатор заявки, которую нужно заменить
-     * @param item Новая заявка на которую нужно заменить старую
-     * @return true, если замена прошла успешно, иначе false
+     * Метод заменяет заявку содержащуюся в БД.
+     * @param id Идентификатор заявки, которую нужно заменить.
+     * @param item Новая заявка на которую нужно заменить старую.
+     * @return true, если замена прошла успешно, иначе false.
      */
     @Override
     public boolean replace(int id, Item item) {

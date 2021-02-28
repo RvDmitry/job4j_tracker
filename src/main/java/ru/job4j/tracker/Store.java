@@ -9,7 +9,6 @@ import java.util.List;
  * @version 1
  */
 public interface Store extends AutoCloseable {
-    void init();
     Item add(Item item);
     boolean replace(int id, Item item);
     boolean delete(int id);

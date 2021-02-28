@@ -17,11 +17,6 @@ public class MemTracker implements Store {
     private final List<Item> items = new ArrayList<>();
 
     @Override
-    public void init() {
-
-    }
-
-    @Override
     public void close() throws Exception {
 
     }
