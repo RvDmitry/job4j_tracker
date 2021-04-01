@@ -1,6 +1,7 @@
 package ru.job4j.di;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
  * @author Dmitry Razumov
  * @version 1
  */
+@Scope("prototype")
 @Component
 public class StartUI {
 
