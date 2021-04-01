@@ -17,10 +17,18 @@ public class StartUI {
     }
 
     /**
-     * Метод добавляет строки в хранилище.
+     * Метод добавляет введенную в консоли строку в хранилище.
      */
     public void add() {
         String value = input.askStr("Введите строку: ");
+        store.add(value);
+    }
+
+    /**
+     * Метод добавляет переданную строку в хранилище.
+     * @param value Строка.
+     */
+    public void add(String value) {
         store.add(value);
     }
 
